@@ -45,7 +45,7 @@ test.describe('Login tests', () => {
     test.skip('TC08 - Login no exitoso con usuario inválido y contraseña vacía  ', async ({page}) => {
     // test bloqueado por BUG-2
     });
-
+ 
     test.skip('TC09 - Login no exitoso con campos vacios  ', async ({page}) => {
     // test bloqueado por BUG-2
     });
