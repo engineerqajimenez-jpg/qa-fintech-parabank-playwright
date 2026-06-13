@@ -1,31 +1,25 @@
 import {test, expect} from '@playwright/test';
+import { LoginPage } from '../../pages/LoginPage';
 
 test.describe('Login tests', () => {
 
     test('TC01 - Login exitoso', async ({page}) => {
-
-        await page.goto('https://parabank.parasoft.com/parabank/index.htm?ConnType=JDBC');
-        await page.fill('input[name="username"]', 'Joseito');
-        await page.fill('input[name="password"]', '123456');
-        await page.click('input[value="Log In"]');
-        await expect(page.locator('p.smallText')).toContainText('Welcome');
-
+        const loginPage = new LoginPage(page);
+        await loginPage.navigate();
+        await loginPage.login('john', 'demo');
+        await expect(await loginPage.getWelcomeMessage()).toContainText('Welcome');
     });
 
     test('TC02 - Login no exitoso con credenciales invalidas', async ({page}) => {
-
-        await page.goto('https://parabank.parasoft.com/parabank/index.htm?ConnType=JDBC');
-        await page.fill('input[name="username"]', 'usuariofalso');
-        await page.fill('input[name="password"]', 'passwordfalso');
-        await page.click('input[value="Log In"]');
-        await expect(page.locator('.error')).toContainText('The username and password could not be verified');
-
+        const loginPage = new LoginPage(page);
+        await loginPage.navigate();
+        await loginPage.login('usuariofalso', 'passwordfalso');
+        await expect(await loginPage.getErrorMessage()).toContainText('The username and password could not be verified');
     });
 
-    test.skip('TC03 - Login no exitoso con usuario válido y contraseña vacía', async ({page}) => {
+    test.skip('TC03 - Login no exitoso con usuario válido y contraseña vacía (BUG-2)', async ({page}) => {
     // test bloqueado por BUG-2
     });
-
     test.skip('TC04 - Login no exitoso con usuario invalido y contraseña valida', async ({page}) => {
     // test bloqueado por BUG-2
     });
