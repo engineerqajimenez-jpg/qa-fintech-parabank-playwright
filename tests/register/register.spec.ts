@@ -125,7 +125,7 @@ test.describe('Register tests',() => {
     });
 
     test ('TC08 - Registro no exitoso con numeros en First Name y Last Name', async ({page}) => {
-        const username = `Alexander${Date.now()}`;
+        const username = `Alexander${Date.now()}${Math.floor(Math.random() * 1000)}`;
         await page.goto('https://parabank.parasoft.com/parabank/register.htm')
         await page.fill ('input[name="customer.firstName"]', 'Alexander123')
         await page.fill ('input[name="customer.lastName"]', 'Perez456')
@@ -143,7 +143,7 @@ test.describe('Register tests',() => {
     });
 
     test ('TC09 - Registro no exitoso con letras en campo SSN', async ({page}) => {
-        const username = `Alexander${Date.now()}`;
+        const username = `Alexander${Date.now()}${Math.floor(Math.random() * 1000)}`;
         await page.goto('https://parabank.parasoft.com/parabank/register.htm')
         await page.fill ('input[name="customer.firstName"]', 'Alexander')
         await page.fill ('input[name="customer.lastName"]', 'Perez')

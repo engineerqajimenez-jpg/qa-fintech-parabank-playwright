@@ -1,5 +1,4 @@
 import {test, expect} from '@playwright/test';
-import { LoginPage } from '../../pages/LoginPage';
 import { OpenAccountPage } from '../../pages/OpenAccountPage';
 
 test.use({
@@ -9,12 +8,6 @@ test.use({
     });
 
 test.describe('Open Account', () => {
-
-    test.beforeEach(async ({page}) => {
-        const loginPage = new LoginPage(page);
-        await loginPage.navigate();
-        await loginPage.login('john', 'demo');
-    });
 
     test ('TC01 - Apertura de cuenta checking exitosa', async ({page}) => {
         const openAccountPage = new OpenAccountPage(page);

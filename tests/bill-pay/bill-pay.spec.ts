@@ -1,6 +1,5 @@
 import {test, expect} from '@playwright/test';
 import { BillPayPage } from '../../pages/BillPayPage';
-import {LoginPage} from '../../pages/LoginPage';
 
 test.use({
     launchOptions: {
@@ -9,12 +8,6 @@ test.use({
     });
 
 test.describe('Bill Pay', () => {
-
-   test.beforeEach(async ({page}) => {
-    const loginPage = new LoginPage(page);
-    await loginPage.navigate();
-    await loginPage.login('john', 'demo');
-   });
 
    test('TC01 - Pago de factura exitoso', async ({page}) => {
    const billPayPage = new BillPayPage(page);

@@ -17,11 +17,27 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
+      use: { ...devices['Desktop Chrome'],
+        storageState: 'playwright/.auth/user.json',
+      },
+      testIgnore: [
+        '**/api/**/*.spec.ts',
+        '**/login/**/*.spec.ts',
+        '**/register/**/*.spec.ts',
+      ],
+      dependencies: ['setup'],
+    },
+    {
+      name: 'no-auth',
       use: { ...devices['Desktop Chrome'] },
-      testIgnore: '**/api/**/*.spec.ts',
+      testMatch: ['**/login/**/*.spec.ts', '**/register/**/*.spec.ts'],
     },
     {
       name: 'api', 
       testMatch: '**/api/**/*.spec.ts' },
+    {
+      name: 'setup',
+      testMatch: '**/auth.setup.ts',
+    },
   ],
 });
